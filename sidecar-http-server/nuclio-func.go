@@ -1,6 +1,7 @@
 package main
 
 import (
+	nuclio "github.com/nuclio/nuclio-sdk-go"
 	"github.com/valyala/fasthttp"
 	"net/url"
 )
