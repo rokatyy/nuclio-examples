@@ -1,0 +1,67 @@
+metadata:
+  name: test-nuc-121
+  labels:
+    iguazio.com/username: admin
+    nuclio.io/project-name: default
+  resourceVersion: "32340885"
+spec:
+  description: "Showcases unstructured logging and a structured response."
+  handler: "main:Handler"
+  runtime: golang
+  resources:
+    limits:
+      cpu: "2"
+      memory: 20Gi
+    requests:
+      cpu: 25m
+      memory: 1Mi
+  image: "docker-registry.default-tenant.app.dev62.lab.iguazeng.com:80/nuclio/default-test-nuc-121-processor:latest"
+  imageHash: "1706030962782526409"
+  minReplicas: 1
+  maxReplicas: 1
+  triggers:
+    default-http:
+      class: ""
+      kind: http
+      name: default-http
+      maxWorkers: 1
+      attributes:
+        serviceType: ClusterIP
+  version: -1
+  alias: latest
+  build:
+    functionSourceCode: LyoKQ29weXJpZ2h0IDIwMjMgVGhlIE51Y2xpbyBBdXRob3JzLgoKTGljZW5zZWQgdW5kZXIgdGhlIEFwYWNoZSBMaWNlbnNlLCBWZXJzaW9uIDIuMCAodGhlICJMaWNlbnNlIik7CnlvdSBtYXkgbm90IHVzZSB0aGlzIGZpbGUgZXhjZXB0IGluIGNvbXBsaWFuY2Ugd2l0aCB0aGUgTGljZW5zZS4KWW91IG1heSBvYnRhaW4gYSBjb3B5IG9mIHRoZSBMaWNlbnNlIGF0CgogICAgaHR0cDovL3d3dy5hcGFjaGUub3JnL2xpY2Vuc2VzL0xJQ0VOU0UtMi4wCgpVbmxlc3MgcmVxdWlyZWQgYnkgYXBwbGljYWJsZSBsYXcgb3IgYWdyZWVkIHRvIGluIHdyaXRpbmcsIHNvZnR3YXJlCmRpc3RyaWJ1dGVkIHVuZGVyIHRoZSBMaWNlbnNlIGlzIGRpc3RyaWJ1dGVkIG9uIGFuICJBUyBJUyIgQkFTSVMsCldJVEhPVVQgV0FSUkFOVElFUyBPUiBDT05ESVRJT05TIE9GIEFOWSBLSU5ELCBlaXRoZXIgZXhwcmVzcyBvciBpbXBsaWVkLgpTZWUgdGhlIExpY2Vuc2UgZm9yIHRoZSBzcGVjaWZpYyBsYW5ndWFnZSBnb3Zlcm5pbmcgcGVybWlzc2lvbnMgYW5kCmxpbWl0YXRpb25zIHVuZGVyIHRoZSBMaWNlbnNlLgoqLwoKcGFja2FnZSBtYWluCgppbXBvcnQgKAoJImdpdGh1Yi5jb20vbnVjbGlvL251Y2xpby1zZGstZ28iCiAgICAiZ2l0aHViLmNvbS92YWx5YWxhL2Zhc3RodHRwIgoJIm5ldC91cmwiCikKCmZ1bmMgSGFuZGxlcihjb250ZXh0ICpudWNsaW8uQ29udGV4dCwgZXZlbnQgbnVjbGlvLkV2ZW50KSAoaW50ZXJmYWNle30sIGVycm9yKSB7Cgljb250ZXh0LkxvZ2dlci5JbmZvKCJHb3QgcmVxdWVzdCwgc2VuZGluZyBpdCB0byBzaWRlY2FyIGNvbnRhaW5lciIpCglyZXEgOj0gZmFzdGh0dHAuQWNxdWlyZVJlcXVlc3QoKQoJcmVxLlNldEJvZHkoZXZlbnQuR2V0Qm9keSgpKQoJc2lkZWNhckhvc3QsIF8gOj0gdXJsLkpvaW5QYXRoKCJodHRwOi8vMC4wLjAuMDo5MDAwIiwgZXZlbnQuR2V0UGF0aCgpKQogICAgY29udGV4dC5Mb2dnZXIuSW5mbyhzaWRlY2FySG9zdCkKCXJlcS5TZXRSZXF1ZXN0VVJJKHNpZGVjYXJIb3N0KQoJcmVzcCA6PSBmYXN0aHR0cC5BY3F1aXJlUmVzcG9uc2UoKQoJZXJyIDo9IGZhc3RodHRwLkRvKHJlcSwgcmVzcCkKCXJldHVybiBudWNsaW8uUmVzcG9uc2V7CgkJU3RhdHVzQ29kZTogIHJlc3AuU3RhdHVzQ29kZSgpLAoJCUNvbnRlbnRUeXBlOiAiYXBwbGljYXRpb24vdGV4dCIsCgkJQm9keTogICAgICAgIHJlc3AuQm9keSgpLAoJfSwgZXJyCn0=
+    registry: "docker-registry.default-tenant.svc.cluster.local:5000"
+    offline: true
+    runtimeAttributes:
+      repositories: []
+    codeEntryType: sourceCode
+    timestamp: 1706031017
+  runRegistry: "docker-registry.default-tenant.app.dev62.lab.iguazeng.com:80"
+  loggerSinks:
+    - level: debug
+  platform: {}
+  securityContext: {}
+  scaleToZero:
+    scaleResources:
+      - metricName: nuclio_processor_handled_events_total
+        windowSize: 10m
+        threshold: 0
+  disableDefaultHTTPTrigger: false
+  priorityClassName: igz-workload-medium
+  eventTimeout: ""
+  sidecars:
+    - name: sidecar
+      image: "rokatyy/main:v1"
+      resources:
+        requests:
+          cpu: 25m
+          memory: 1Mi
+      volumeMounts:
+        - name: function-secret
+          readOnly: true
+          mountPath: /etc/nuclio/secrets
+        - name: platform-config-volume
+          mountPath: /etc/nuclio/config/platform
+        - name: processor-config-volume
+          mountPath: /etc/nuclio/config/processor
